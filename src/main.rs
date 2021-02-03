@@ -1,6 +1,7 @@
 extern crate requests;
 use std::println;
 
+use std::io;
 use std::fs::File;
 use std::io::Error;
 
@@ -32,10 +33,8 @@ fn main() -> Result<(), Error> {
     }
 
     let response = requests::get(format!("https://forvo.com/search/{}/", word)).unwrap();
-
     let content = response.text().unwrap();
 
-    // println!("{}", content);
 
 //     let content = r#"
 // k=\"Play(265113,\'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==\',\'OTAwMDg2My8zO
@@ -50,19 +49,26 @@ fn main() -> Result<(), Error> {
 
     // println!("{:?}",content);
 
+
+    let regex_num_results_found = Regex::new(r"(>)(\d+)( words found)").unwrap();
+    for caps in regex_num_results_found.captures_iter(content) {
+        let num_results = caps.get(2).unwrap().as_str();
+        println!("{} words found.", num_results);
+    }
+
     let regex_sequence_pattern = Regex::new(r"(Play\(\w+,')(\w+=*)").unwrap(); 
     
 
     for caps in regex_sequence_pattern.captures_iter(content) {
         let code_sequence = caps.get(2).unwrap().as_str();
 
-        println!("{}", code_sequence);
+        // println!("{}", code_sequence);
 
         let outputs = File::create("/tmp/forvo.mp3")?;
         let errors = outputs.try_clone()?;
     
         Command::new("curl")
-            .args(&["-s", format!("https://forvo.com/player-mp3Handler.php?path={}",code_sequence).as_str()])
+            .args(&["-s", format!("https://forvo.com/player-mp3Handler.php?path={}", code_sequence).as_str()])
             .stdout(Stdio::from(outputs))
             .stderr(Stdio::from(errors))
             .spawn()?
@@ -74,7 +80,12 @@ fn main() -> Result<(), Error> {
             .ok()
             .expect("Can't play audio recording");
 
-        break;
+        
+        let mut input = String::new();
+        match io::stdin().read_line(&mut input) {
+            Ok(n) => { },
+            Err(error) => println!("error: {}", error),
+        }
         
     }
 

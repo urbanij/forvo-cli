@@ -14,7 +14,7 @@ fn main() -> Result<(), Error> {
 
     // default values of argparsed arguments
     let mut verbose = false;
-    let mut word = String::from("");
+    let mut word = "".to_string();
 
     {   // this block limits scope of borrows by ap.refer() method
         let mut ap = ArgumentParser::new();
@@ -34,19 +34,6 @@ fn main() -> Result<(), Error> {
 
     let response = requests::get(format!("https://forvo.com/search/{}/", word)).unwrap();
     let content = response.text().unwrap();
-
-
-//     let content = r#"
-// k=\"Play(265113,\'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==\',\'OTAwMDg2My8zO
-//     "#;
-
-/// ok
-// let content = r##"
-// k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2My8zO
-//     "##;
-
-
-
     // println!("{:?}",content);
 
 
@@ -64,7 +51,7 @@ fn main() -> Result<(), Error> {
 
         // println!("{}", code_sequence);
 
-        let outputs = File::create("/tmp/forvo.mp3")?;
+        let outputs = File::create(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())?;
         let errors = outputs.try_clone()?;
     
         Command::new("curl")
@@ -74,16 +61,26 @@ fn main() -> Result<(), Error> {
             .spawn()?
             .wait_with_output()?;
         
-        Command::new("afplay")
-            .arg("/tmp/forvo.mp3")
-            .spawn()
-            .ok()
-            .expect("Can't play audio recording");
+        if cfg!(target_os = "macos") {
+            Command::new("afplay")
+                .arg(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())
+                .spawn()
+                .ok()
+                .expect("Can't play audio recording");
+        } else {
+            println!("Sorry, I'm not able to autoplay the audio recording 
+on your system (which is not macOS). 
+While I'm working on that you can navigate to {} 
+and play that yourself, sorry for the inconvenience.", 
+                format!("/tmp/{}.mp3", word.replace(" ", "_")) 
+            );
+        }
 
         
+        // the user types enter or anything else to listen to the next result.
         let mut input = String::new();
         match io::stdin().read_line(&mut input) {
-            Ok(n) => { },
+            Ok(_n) => { },
             Err(error) => println!("error: {}", error),
         }
         
@@ -109,3 +106,23 @@ fn main() -> Result<(), Error> {
     Ok(())
 }
 
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn test_sqrt() -> Result<(), String> {
+        use super::*;
+
+        let content = r##"
+k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2My8zO
+"##;
+        let regex_sequence_pattern = Regex::new(r"(Play\(\w+,')(\w+=*)").unwrap(); 
+    
+        for caps in regex_sequence_pattern.captures_iter(content) {
+            let code_sequence = caps.get(2).unwrap().as_str();
+            assert_eq!(code_sequence, "OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==");
+        }
+        Ok(())
+    }
+}

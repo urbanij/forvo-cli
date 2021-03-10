@@ -3,6 +3,9 @@ name = "forvo-cli"
 version = "0.1.0"
 authors = ["Francesco Urbani <francescourbanidue@gmail.com>"]
 edition = "2018"
+description = "Play Forvo pronunciations directly from the terminal"
+repository = "https://github.com/urbanij/forvo-cli/"
+keywords = ["forvo", "pronunciations"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

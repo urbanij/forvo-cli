@@ -1,3 +1,8 @@
+/*
+ * Author(s):   Francesco Urbani
+ * Date:        some evening between January-Februrary 2021
+ */
+ 
 extern crate requests;
 use std::println;
 
@@ -34,7 +39,7 @@ fn main() -> Result<(), Error> {
 
     let response = requests::get(format!("https://forvo.com/search/{}/", word)).unwrap();
     let content = response.text().unwrap();
-    // println!("{:?}",content);
+    // println!("{}",content);
 
 
     let regex_num_results_found = Regex::new(r"(>)(\d+)( words found)").unwrap();

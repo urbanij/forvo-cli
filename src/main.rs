@@ -46,6 +46,8 @@ fn main() -> Result<(), Error> {
     for caps in regex_num_results_found.captures_iter(content) {
         let num_results = caps.get(2).unwrap().as_str();
         println!("{} words found.", num_results);
+        println!("\tPress enter (↵) to play them, one after another.");
+        println!("\tPress ^C (ctrl-C / cmd-C) to quit prematurely.");
     }
 
     let regex_sequence_pattern = Regex::new(r"(Play\(\w+,')(\w+=*)").unwrap(); 

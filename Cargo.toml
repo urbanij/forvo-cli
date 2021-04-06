@@ -14,7 +14,7 @@ exclude = ["LICENSE.txt"]
 
 [dependencies]
 # soup = "0.5.0"
-requests = "0.0.30"
-regex     = "1.4.3"
-argparse  = "0.2.2"
+reqwest = "0.9.24"
+regex = "1.4.3"
+argparse = "0.2.2"
 # exitcode  = "1.1.2"

@@ -2,8 +2,7 @@
  * Author(s):   Francesco Urbani
  * Date:        some evening between January-Februrary 2021
  */
- 
-extern crate requests;
+
 use std::println;
 
 use std::io;
@@ -14,6 +13,8 @@ use std::process::{Command, Stdio};
 
 use regex::Regex;
 use argparse::{ArgumentParser, StoreTrue, Store};
+
+extern crate reqwest;
 
 fn main() -> Result<(), Error> {
 
@@ -37,10 +38,15 @@ fn main() -> Result<(), Error> {
         ap.parse_args_or_exit();
     }
 
-    let response = requests::get(format!("https://forvo.com/search/{}/", word)).unwrap();
-    let content = response.text().unwrap();
-    // println!("{}",content);
+    let url = format!("https://forvo.com/search/{}/", word);
 
+    let content = reqwest::get(url.as_str())
+                    .expect("Could not make request.")
+                    .text()
+                    .expect("Could not read text.");
+    
+    let content = content.as_str();
+    // println!("{}", content);
 
     let regex_num_results_found = Regex::new(r"(>)(\d+)( words found)").unwrap();
     for caps in regex_num_results_found.captures_iter(content) {
@@ -93,7 +99,6 @@ and play that yourself, sorry for the inconvenience.",
         
     }
 
-
     // if cfg!(target_os = "windows") {
     //     Command::new("cmd")
     //             .args(&["/C", "echo hello"])
@@ -107,7 +112,6 @@ and play that yourself, sorry for the inconvenience.",
     //             .expect("failed to execute process")
     // };
     
-
 
 
     Ok(())

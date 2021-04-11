@@ -3,9 +3,6 @@
  * Date:        some evening between January-Februrary 2021
  */
 
-use std::println;
-
-use std::io;
 use std::fs::File;
 use std::io::Error;
 
@@ -62,7 +59,9 @@ fn main() -> Result<(), Error> {
     for caps in regex_sequence_pattern.captures_iter(content) {
         let code_sequence = caps.get(2).unwrap().as_str();
 
-        // println!("{}", code_sequence);
+        if verbose {
+            println!("https://forvo.com/player-mp3Handler.php?path={}", code_sequence);
+        }
 
         let outputs = File::create(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())?;
         let errors = outputs.try_clone()?;
@@ -74,12 +73,23 @@ fn main() -> Result<(), Error> {
             .spawn()?
             .wait_with_output()?;
         
+        
         if cfg!(target_os = "macos") {
+            // println!("Hi from macOS");
             Command::new("afplay")
                 .arg(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())
                 .spawn()
                 .ok()
                 .expect("Can't play audio recording");
+        } else if cfg!(target_os = "linux") {
+            // println!("Hi from Linux");
+            Command::new("play")
+                .arg("-s")
+                .arg(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())
+                .spawn()
+                .ok()
+                .expect("Can't play audio recording");
+                // "apt-get install sox" <- play <filename>.mp3 does not work either
         } else {
             println!("Sorry, I'm not able to autoplay the audio recording 
 on your system (which is not macOS). 
@@ -92,7 +102,7 @@ and play that yourself, sorry for the inconvenience.",
         
         // the user types enter or anything else to listen to the next result.
         let mut input = String::new();
-        match io::stdin().read_line(&mut input) {
+        match std::io::stdin().read_line(&mut input) {
             Ok(_n) => { },
             Err(error) => println!("error: {}", error),
         }

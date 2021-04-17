@@ -8,7 +8,7 @@ use regex::Regex;
 
 
 /// Pass a word to this function and return a list of codes you can use to 
-/// listen their pronounciations on [Forvo](https://forvo.com/)
+/// listen their pronunciations on [Forvo](https://forvo.com/)
 pub fn retrieve_audios(word: &String) -> Result<Vec<String>, std::io::Error> {
 
     let url = format!("https://forvo.com/search/{}/", word);
@@ -32,17 +32,17 @@ pub fn retrieve_audios(word: &String) -> Result<Vec<String>, std::io::Error> {
     */
 
 
-    let mut pronounciations = vec![];
+    let mut pronunciations = vec![];
 
     let regex_sequence_pattern = Regex::new(r"(Play\(\w+,')(\w+=*)").unwrap(); 
     for caps in regex_sequence_pattern.captures_iter(content.as_str()) {
         let code_sequence = caps.get(2).unwrap().as_str();
 
-        pronounciations.push(code_sequence.to_string());
+        pronunciations.push(code_sequence.to_string());
 
     }
 
-    Ok(pronounciations)
+    Ok(pronunciations)
 }
 
 

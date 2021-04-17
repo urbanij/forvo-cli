@@ -18,3 +18,12 @@ reqwest = "0.9.24"
 regex = "1.4.3"
 argparse = "0.2.2"
 # exitcode  = "1.1.2"
+
+
+[lib]
+name = "forvolib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "forvo-cli"
+path = "src/bin.rs"

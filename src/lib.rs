@@ -42,32 +42,15 @@ pub fn retrieve_audios(word: &String) -> Result<Vec<String>, std::io::Error> {
 
     }
 
-    // if cfg!(target_os = "windows") {
-    //     Command::new("cmd")
-    //             .args(&["/C", "echo hello"])
-    //             .output()
-    //             .expect("failed to execute process")
-    // } else {
-    //     Command::new("sh")
-    //             .arg("-c")
-    //             .arg("echo hello")
-    //             .output()
-    //             .expect("failed to execute process")
-    // };
-    
-
-
     Ok(pronounciations)
 }
 
 
 #[cfg(test)]
 mod tests {
-
+    use super::*;  
     #[test]
-    fn test_sqrt() -> Result<(), String> {
-        use super::*;
-
+    fn test_regex_1() -> Result<(), String> {  
         let content = r##"
 k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2My8zO
 "##;
@@ -77,6 +60,19 @@ k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2M
             let code_sequence = caps.get(2).unwrap().as_str();
             assert_eq!(code_sequence, "OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==");
         }
+        Ok(())
+    }
+
+    #[test]
+    fn test_results_1() -> Result<(), String> {
+        assert_eq!(
+            retrieve_audios(&"rijksmuseum".to_string()).unwrap(),
+            vec![
+                String::from("OTM4NDcyNy8xMTgvOTM4NDcyN18xMThfMzk1NTc1Lm1wMw=="),
+                String::from("OTI1MDI1OS8xMTgvOTI1MDI1OV8xMThfMjA5NDg0NF8xLm1wMw=="),
+                String::from("OTkxNzYyOC8xMTgvOTkxNzYyOF8xMThfNjMwMTQ0Ni5tcDM="),
+            ]
+        );
         Ok(())
     }
 }

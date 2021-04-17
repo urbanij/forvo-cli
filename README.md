@@ -5,6 +5,9 @@ Play [Forvo](https://forvo.com/) pronunciations straight from your terminal.
 #### Installation:
 `cargo install forvo-cli` <sup>1</sup> 
 
+`forvo-cli -v -w <some_word>`
+
+
 ---------------------------------------
 
 ##### Caveat:

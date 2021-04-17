@@ -5,9 +5,6 @@ use std::process::{Command, Stdio};
 
 
 
-use forvolib::*;
-
-
 fn main() -> Result<(), std::io::Error> {
     // default values of argparsed arguments
     let mut verbose = false;
@@ -80,10 +77,19 @@ and play that yourself, sorry for the inconvenience.",
             Err(error) => println!("error: {}", error),
         }
 
-
-
+        // if cfg!(target_os = "windows") {
+        //     Command::new("cmd")
+        //             .args(&["/C", "echo hello"])
+        //             .output()
+        //             .expect("failed to execute process")
+        // } else {
+        //     Command::new("sh")
+        //             .arg("-c")
+        //             .arg("echo hello")
+        //             .output()
+        //             .expect("failed to execute process")
+        // };
     }
 
-    
     Ok(())
 }

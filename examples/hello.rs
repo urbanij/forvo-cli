@@ -1,6 +1,3 @@
-use forvolib::*;
-
-
 fn main() -> Result<(), std::io::Error> {
     
     let word = "rijksmuseum";

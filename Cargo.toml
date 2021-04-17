@@ -1,6 +1,6 @@
 [package]
 name = "forvo-cli"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Francesco Urbani <francescourbanidue@gmail.com>"]
 edition = "2018"
 readme = "README.md"
@@ -8,6 +8,8 @@ readme = "README.md"
 license = "MIT"
 description = "Play Forvo pronunciations directly from the terminal"
 repository = "https://github.com/urbanij/forvo-cli/"
+documentation = "https://docs.rs/forvolib"
+
 keywords = ["forvo", "pronunciations"]
 exclude = ["LICENSE.txt"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

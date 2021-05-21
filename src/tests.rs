@@ -22,7 +22,7 @@ k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2M
     #[test]
     fn test_results_1() -> Result<(), String> {
         assert_eq!(
-            retrieve_audios(&"rijksmuseum".to_string()).unwrap(),
+            retrieve_audios(&"rijksmuseum").unwrap(),
             vec![
                 String::from("OTM4NDcyNy8xMTgvOTM4NDcyN18xMThfMzk1NTc1Lm1wMw=="),
                 String::from("OTI1MDI1OS8xMTgvOTI1MDI1OV8xMThfMjA5NDg0NF8xLm1wMw=="),
@@ -35,9 +35,9 @@ k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2M
     #[test]
     fn test_results_2() -> Result<(), String> {
         assert_eq!(
-            retrieve_audios(&"llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch".to_string()).unwrap(),
+            retrieve_audios(&"trolltunga").unwrap(),
             vec![
-                String::from("OTY2ODAyMC8zMi85NjY4MDIwXzMyXzcwODQ1MzgubXAz"),
+                String::from("OTE2ODg4Mi8xMjAvOTE2ODg4Ml8xMjBfMjM4MjUyNC5tcDM="),
             ]
         );
         Ok(())

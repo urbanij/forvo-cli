@@ -7,20 +7,19 @@ use regex::Regex;
 mod tests;
 
 
-/// Pass a word to this function and return a list of codes you can use to 
-/// listen their pronunciations on [Forvo](https://forvo.com/)
-pub fn retrieve_audios(word: &String) -> Result<Vec<String>, std::io::Error> {
+/// Pass a word to this function and return a list of URLs you can use (i.e. visit/download) to 
+/// listen its pronunciation on [Forvo](https://forvo.com/).
+pub fn retrieve_audios(word: &str) -> Result<Vec<String>, std::io::Error> {
 
     let url = format!("https://forvo.com/search/{}/", word);
 
-    let content = reqwest::get(url.as_str())
+    let content = reqwest::get(&url.to_string())
                     .expect("Could not make request.")
                     .text()
                     .expect("Could not read text.");
     
     // println!("{}", content);
 
-    
     /*
     let regex_num_results_found = Regex::new(r"(>)(\d+)( words found)").unwrap();
     for caps in regex_num_results_found.captures_iter(content.as_str()) {
@@ -30,7 +29,6 @@ pub fn retrieve_audios(word: &String) -> Result<Vec<String>, std::io::Error> {
         println!("\tPress ^C (ctrl-C / cmd-C) to quit prematurely.");
     }
     */
-
 
     let mut pronunciations = vec![];
 

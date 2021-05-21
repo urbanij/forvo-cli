@@ -2,8 +2,12 @@ fn main() -> Result<(), std::io::Error> {
     
     let word = "rijksmuseum";
     
-    for i in forvolib::retrieve_audios(&word.to_string())? {
-        println!("https://forvo.com/player-mp3Handler.php?path={}", i);
+    let results = forvolib::retrieve_audios(&word.to_string())?;
+
+    println!("{} pronunciations found for {}:\n", results.len(), word);
+
+    for audio_url in results {
+        println!("https://forvo.com/player-mp3Handler.php?path={}", audio_url);
     }
 
     Ok(())

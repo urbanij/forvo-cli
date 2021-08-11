@@ -37,7 +37,7 @@ k="Play(265113,'OTAwMDg2My8zOS85MDAwODYzXzM5XzM0MTkwXzIxOTg0Lm1wMw==','OTAwMDg2M
         assert_eq!(
             retrieve_audios(&"trolltunga").unwrap(),
             vec![
-                String::from("OTE2ODg4Mi8xMjAvOTE2ODg4Ml8xMjBfMjM4MjUyNC5tcDM0="),
+                String::from("OTE2ODg4Mi8xMjAvOTE2ODg4Ml8xMjBfMjM4MjUyNC5tcDM="),
             ]
         );
         Ok(())

@@ -5,6 +5,7 @@ Play [Forvo](https://forvo.com/) pronunciations straight from your terminal.
   
 ## Badges
 
+![example workflow](https://github.com/urbanij/forvo-cli/actions/workflows/rust.yml/badge.svg)
 <a href="https://crates.io/crates/forvo-cli"><img src="https://img.shields.io/crates/d/forvo-cli"></a>
 
 

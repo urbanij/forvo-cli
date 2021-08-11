@@ -49,7 +49,6 @@ fn main() -> Result<(), std::io::Error> {
             Command::new("afplay")
                 .arg(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())
                 .spawn()
-                .ok()
                 .expect("Can't play audio recording");
         } else if cfg!(target_os = "linux") {
             // println!("Hi from Linux");
@@ -57,7 +56,6 @@ fn main() -> Result<(), std::io::Error> {
                 .arg("-s")
                 .arg(format!("/tmp/{}.mp3", word.replace(" ", "_")).as_str())
                 .spawn()
-                .ok()
                 .expect("Can't play audio recording");
                 // "apt-get install sox" <- play <filename>.mp3 does not work either
         } else {

@@ -13,7 +13,7 @@ pub fn retrieve_audios(word: &str) -> Result<Vec<String>, std::io::Error> {
 
     let url = format!("https://forvo.com/search/{}/", word);
 
-    let content = reqwest::get(&url.to_string())
+    let content = reqwest::get(&url)
                     .expect("Could not make request.")
                     .text()
                     .expect("Could not read text.");

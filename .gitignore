@@ -4,3 +4,5 @@
 
 .DS_Store
 aux
+
+print_rust_code.*

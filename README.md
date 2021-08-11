@@ -5,7 +5,8 @@ Play [Forvo](https://forvo.com/) pronunciations straight from your terminal.
   
 ## Badges
 
-![](https://img.shields.io/crates/d/forvo-cli)
+<a href="https://crates.io/crates/forvo-cli"><img src="https://img.shields.io/crates/d/forvo-cli"></a>
+
 
 ## Installation 
 
@@ -25,14 +26,15 @@ cargo run --example hello
 ``` 
 -->
 
-## Demo
+## Usage
 
 ```bash
 forvo-cli -v -w <some_word>
 ```
 
 
-[![asciicast](https://asciinema.org/a/q48AMFx9rr00kzQDBHxnDQtel.svg)](https://asciinema.org/a/q48AMFx9rr00kzQDBHxnDQtel)
+<!-- [![asciicast](https://asciinema.org/a/q48AMFx9rr00kzQDBHxnDQtel.svg)](https://asciinema.org/a/q48AMFx9rr00kzQDBHxnDQtel) -->
+
 ## Documentation
 
 [Documentation](https://docs.rs/forvo-cli/0.1.2/forvolib/)

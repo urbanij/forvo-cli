@@ -9,6 +9,7 @@ fn main() -> Result<(), std::io::Error> {
     // default values of argparsed arguments
     let mut verbose = false;
     let mut word = "".to_string();
+    let mut list = "".to_string();
 
     {   // this block limits scope of borrows by ap.refer() method
         let mut ap = ArgumentParser::new();
@@ -17,6 +18,12 @@ fn main() -> Result<(), std::io::Error> {
             .add_option(&["-w"], 
                         Store,
                         "word")
+            .required();
+        
+        ap.refer(&mut list)
+            .add_option(&["-l", "--list"], 
+                        Store,
+                        "show list")
             .required();
                         
         ap.refer(&mut verbose)

@@ -10,8 +10,8 @@ fn main() -> Result<(), std::io::Error> {
 
     println!("{} pronunciations found for {}:\n", results.len(), word);
 
-    for audio_url in results {
-        println!("https://forvo.com/player-mp3Handler.php?path={}", audio_url);
+    for (index, audio_url) in results.iter().enumerate() {
+        println!("{}) https://forvo.com/player-mp3Handler.php?path={}", index+1, audio_url);
     }
 
     Ok(())

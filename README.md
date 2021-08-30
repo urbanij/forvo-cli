@@ -1,13 +1,9 @@
-# forvo-cli
-
-Play [Forvo](https://forvo.com/) pronunciations straight from your terminal.
-
-  
-## Badges
-
 <a href="https://github.com/urbanij/forvo-cli/actions"><img src="https://github.com/urbanij/forvo-cli/actions/workflows/rust.yml/badge.svg"></a>
 <a href="https://crates.io/crates/forvo-cli"><img src="https://img.shields.io/crates/d/forvo-cli"></a>
 
+# forvo-cli
+
+Play [Forvo](https://forvo.com/) pronunciations straight from your terminal.
 
 ## Installation 
 

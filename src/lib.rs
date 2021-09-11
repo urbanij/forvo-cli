@@ -9,6 +9,18 @@ mod tests;
 
 /// Pass a word to this function and return a list of URLs you can use (i.e. visit/download) to 
 /// listen its pronunciation on [Forvo](https://forvo.com/).
+/// ```rust
+/// use forvolib::retrieve_audios;
+///
+/// assert_eq!(
+///     retrieve_audios(&"rijksmuseum").unwrap(),
+///     vec![
+///         String::from("OTM4NDcyNy8xMTgvOTM4NDcyN18xMThfMzk1NTc1Lm1wMw=="),
+///         String::from("OTI1MDI1OS8xMTgvOTI1MDI1OV8xMThfMjA5NDg0NF8xLm1wMw=="),
+///         String::from("OTkxNzYyOC8xMTgvOTkxNzYyOF8xMThfNjMwMTQ0Ni5tcDM="),
+///     ]
+/// );
+/// ```
 pub fn retrieve_audios(word: &str) -> Result<Vec<String>, std::io::Error> {
 
     let url = format!("https://forvo.com/search/{}/", word);

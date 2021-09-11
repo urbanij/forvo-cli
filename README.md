@@ -26,8 +26,13 @@ cargo run --example hello
 ## Usage
 
 ```bash
-forvo-cli -v -w <some_word>
+forvo-cli -w <word> [-v]
 ```
+e.g.:
+```bash
+forvo-cli -w torvalds -v
+```
+
 
 
 <!-- [![asciicast](https://asciinema.org/a/q48AMFx9rr00kzQDBHxnDQtel.svg)](https://asciinema.org/a/q48AMFx9rr00kzQDBHxnDQtel) -->
